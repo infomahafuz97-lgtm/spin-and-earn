@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spin & Earn</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🎡 Spin & Earn</h1>
+
+<div id="wheel-container">
+  <div id="pointer"></div>
+  <div id="wheel">SPIN</div>
+</div>
+
+<div id="message"></div>
+
+<a id="earnLink" href="#" target="_blank">
+  <button>💰 Claim Reward</button>
+</a>
+
+<script>
+// Telegram WebApp init
+if(window.Telegram.WebApp){
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+}
+
+// ⚠️ Replace with your Monetag Smartlink
+const monetagLink = "YOUR_MONETAG_SMARTLINK";
+document.getElementById('earnLink').href = monetagLink;
+
+const wheel = document.getElementById('wheel');
+const message = document.getElementById('message');
+
+wheel.addEventListener('click', function() {
+    const randomDegree = Math.floor(Math.random() * 360) + 1080; // spin effect
+    wheel.style.transform = `rotate(${randomDegree}deg)`;
+    
+    message.textContent = "Spinning...";
+    setTimeout(() => {
+        const rewards = ["💰 Coins!", "🎁 Bonus!", "🏆 Jackpot!", "💸 Cash!"];
+        const reward = rewards[Math.floor(Math.random() * rewards.length)];
+        message.textContent = `You won ${reward}`;
+        window.open(monetagLink, '_blank');
+    }, 4000);
+});
+</script>
+
+</body>
+</html>
